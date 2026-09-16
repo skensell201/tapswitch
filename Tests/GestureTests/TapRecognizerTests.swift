@@ -97,4 +97,73 @@ struct TapRecognizerTests {
         r.process(frame(0.6, 0))
         #expect(hits() == 1)
     }
+
+    @Test("two taps within the gap are a double tap")
+    func doubleTap() {
+        let (r, hits) = make(taps: 2)
+        r.process(frame(0, 5))
+        r.process(frame(0.1, 0))
+        #expect(hits() == 0)
+        r.process(frame(0.3, 5))
+        r.process(frame(0.4, 0))
+        #expect(hits() == 1)
+    }
+
+    @Test("one tap is not a double tap")
+    func singleIsNotDouble() {
+        let (r, hits) = make(taps: 2)
+        r.process(frame(0, 5))
+        r.process(frame(0.1, 0))
+        #expect(hits() == 0)
+    }
+
+    @Test("a gap longer than maxTapGap starts a new series")
+    func gapTooLong() {
+        let (r, hits) = make(taps: 2)
+        r.process(frame(0, 5))
+        r.process(frame(0.1, 0))
+        r.process(frame(0.6, 5))
+        r.process(frame(0.7, 0))
+        #expect(hits() == 0)
+        r.process(frame(0.8, 5))
+        r.process(frame(0.9, 0))
+        #expect(hits() == 1)
+    }
+
+    @Test("a cancelled tap clears the series")
+    func cancelClearsSeries() {
+        let (r, hits) = make(taps: 2)
+        r.process(frame(0, 5))
+        r.process(frame(0.1, 0))
+        r.process(frame(0.3, 5))
+        r.process(frame(0.35, 5, shift: 0.2))
+        r.process(frame(0.4, 0))
+        r.process(frame(0.6, 5))
+        r.process(frame(0.7, 0))
+        #expect(hits() == 0)
+    }
+
+    @Test("reset clears the series")
+    func resetClearsSeries() {
+        let (r, hits) = make(taps: 2)
+        r.process(frame(0, 5))
+        r.process(frame(0.1, 0))
+        r.reset()
+        r.process(frame(0.3, 5))
+        r.process(frame(0.4, 0))
+        #expect(hits() == 0)
+    }
+
+    @Test("the series counts again after recognition")
+    func seriesRestartsAfterRecognition() {
+        let (r, hits) = make(taps: 2)
+        for i in 0..<2 {
+            let base = Double(i) * 2
+            r.process(frame(base, 5))
+            r.process(frame(base + 0.1, 0))
+            r.process(frame(base + 0.3, 5))
+            r.process(frame(base + 0.4, 0))
+        }
+        #expect(hits() == 2)
+    }
 }
