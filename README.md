@@ -5,6 +5,33 @@ by default). A macOS menu bar app, nothing else.
 
 Design: [`docs/superpowers/specs/2026-09-16-tapswitch-design.md`](docs/superpowers/specs/2026-09-16-tapswitch-design.md)
 
+## Installing
+
+Download `TapSwitch-<version>.dmg` from the
+[latest release](https://github.com/skensell201/tapswitch/releases/latest), open
+it, and drag TapSwitch to Applications.
+
+**The first launch needs a trip through System Settings.** The app is signed but
+not notarized — notarization needs a paid Developer ID, and the app's whole
+technique is a private framework, so the App Store was never a destination.
+macOS 26 shows *"Apple could not verify TapSwitch is free of malware"* and
+offers only a Done button.
+
+Double-click TapSwitch once and dismiss that dialog, then open **System Settings
+→ Privacy & Security**, scroll to the bottom, and click **Open Anyway** next to
+the message about TapSwitch. Confirm, and it launches — once. Every launch after
+that is an ordinary one.
+
+If you would rather not visit System Settings, clearing the quarantine flag does
+the same job:
+
+```bash
+xattr -d com.apple.quarantine /Applications/TapSwitch.app
+```
+
+TapSwitch has no Dock icon. It lives in the menu bar as a keyboard symbol, and
+that is where its settings and Quit are. No permissions are requested.
+
 ## How it works
 
 Finger contacts come from the private `MultitouchSupport.framework` — the same
@@ -27,6 +54,7 @@ selects the previously used layout, exactly like the fn/🌐 key.
 swift test                # unit tests
 Scripts/make-dev-cert.sh  # once: stable signing identity
 Scripts/run.sh            # build, bundle and launch build/TapSwitch.app
+Scripts/make-dmg.sh       # release build wrapped in build/TapSwitch-<version>.dmg
 ```
 
 Requires macOS 26 and the Xcode command line tools.
