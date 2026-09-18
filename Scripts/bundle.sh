@@ -14,6 +14,7 @@ rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BIN_DIR/tapswitch" "$APP/Contents/MacOS/TapSwitch"
 cp "$ROOT/Resources/Info.plist" "$APP/Contents/Info.plist"
+cp "$ROOT/Resources/AppIcon.icns" "$APP/Contents/Resources/"
 
 # A stable identity keeps the bundle's designated requirement the same across
 # rebuilds, so Login Items keeps pointing at it. Ad-hoc works too.

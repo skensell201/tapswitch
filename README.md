@@ -55,6 +55,7 @@ swift test                # unit tests
 Scripts/make-dev-cert.sh  # once: stable signing identity
 Scripts/run.sh            # build, bundle and launch build/TapSwitch.app
 Scripts/make-dmg.sh       # release build wrapped in build/TapSwitch-<version>.dmg
+swift Scripts/make-icon.swift  # redraws Resources/AppIcon.icns
 ```
 
 Requires macOS 26 and the Xcode command line tools.
