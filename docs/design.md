@@ -58,9 +58,9 @@ tapswitch/
     TapSwitchApp/   NSStatusItem menu, wiring, launch at login
   Tests/
     GestureTests/  InputSourcesTests/  PreferencesTests/
-  Resources/        Info.plist (LSUIElement = true), AppIcon.icns
-  Scripts/          bundle.sh, run.sh, make-dev-cert.sh
-  docs/superpowers/specs/
+  Resources/        Info.plist (LSUIElement = true), AppIcon.icns, StatusIcon.pdf
+  Scripts/          bundle.sh, run.sh, make-dev-cert.sh, make-dmg.sh, make-icon.swift
+  docs/             design.md, logo.png
 ```
 
 Module dependencies: `TapSwitchApp` → everything; `Gesture`, `Preferences`,

@@ -22,11 +22,27 @@ final class StatusMenu: NSObject, NSMenuDelegate {
         self.launchAtLogin = launchAtLogin
         item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         super.init()
-        item.button?.image = NSImage(
-            systemSymbolName: "keyboard", accessibilityDescription: "TapSwitch")
+        item.button?.image = Self.icon()
         menu.delegate = self
         item.menu = menu
         setStatus(.disabled)
+    }
+
+    /// The mark drawn by Scripts/make-icon.swift, as a template so the menu bar
+    /// tints it. Running outside the bundle there is no resource; fall back to a
+    /// stock symbol rather than an empty item nobody can click.
+    private static func icon() -> NSImage? {
+        guard let url = Bundle.main.url(forResource: "StatusIcon", withExtension: "pdf"),
+              let image = NSImage(contentsOf: url)
+        else {
+            return NSImage(
+                systemSymbolName: "arrow.triangle.2.circlepath",
+                accessibilityDescription: "TapSwitch")
+        }
+        image.size = NSSize(width: 18, height: 18)
+        image.isTemplate = true
+        image.accessibilityDescription = "TapSwitch"
+        return image
     }
 
     func setStatus(_ status: Status) {

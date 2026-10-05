@@ -1,9 +1,11 @@
+<p align="center"><img src="docs/logo.png" width="128" alt="TapSwitch logo"></p>
+
 # TapSwitch
 
 Toggle the keyboard layout by tapping the trackpad with five fingers (twice,
 by default). A macOS menu bar app, nothing else.
 
-Design: [`docs/superpowers/specs/2026-09-16-tapswitch-design.md`](docs/superpowers/specs/2026-09-16-tapswitch-design.md)
+Design: [`docs/design.md`](docs/design.md)
 
 ## Installing
 
@@ -29,8 +31,8 @@ the same job:
 xattr -d com.apple.quarantine /Applications/TapSwitch.app
 ```
 
-TapSwitch has no Dock icon. It lives in the menu bar as a keyboard symbol, and
-that is where its settings and Quit are. No permissions are requested.
+TapSwitch has no Dock icon. It lives in the menu bar as a dot inside two
+circling arrows, and that is where its settings and Quit are. No permissions are requested.
 
 ## How it works
 
@@ -55,7 +57,7 @@ swift test                # unit tests
 Scripts/make-dev-cert.sh  # once: stable signing identity
 Scripts/run.sh            # build, bundle and launch build/TapSwitch.app
 Scripts/make-dmg.sh       # release build wrapped in build/TapSwitch-<version>.dmg
-swift Scripts/make-icon.swift  # redraws Resources/AppIcon.icns
+swift Scripts/make-icon.swift  # redraws the app icon, menu bar icon and logo
 ```
 
 Requires macOS 26 and the Xcode command line tools.
