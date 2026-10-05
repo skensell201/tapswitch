@@ -92,9 +92,10 @@ struct Mark {
 let sRGB = CGColorSpace(name: CGColorSpace.sRGB)!
 let backgroundTop = CGColor(red: 0.23, green: 0.23, blue: 0.25, alpha: 1)
 let backgroundBottom = CGColor(red: 0.07, green: 0.07, blue: 0.08, alpha: 1)
-/// The two layouts the tap switches between.
-let layoutA = CGColor(red: 0.04, green: 0.52, blue: 1.00, alpha: 1)
-let layoutB = CGColor(red: 1.00, green: 0.62, blue: 0.04, alpha: 1)
+/// The two layouts the tap switches between: violet and teal. Never blue over
+/// yellow — together they read as a national flag.
+let layoutA = CGColor(red: 0.55, green: 0.42, blue: 1.00, alpha: 1)
+let layoutB = CGColor(red: 0.13, green: 0.83, blue: 0.75, alpha: 1)
 let white = CGColor(gray: 1, alpha: 1)
 let black = CGColor(gray: 0, alpha: 1)
 
